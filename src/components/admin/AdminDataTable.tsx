@@ -58,11 +58,11 @@ export default function AdminDataTable({ tableName, fields, label }: Props) {
     }
 
     if (editingRow) {
-      const { error } = await supabase.from(table).update(formData).eq("id", editingRow.id);
+      const { error } = await supabase.from(table).update(formData as any).eq("id", editingRow.id);
       if (error) { toast.error(error.message); return; }
       toast.success(`${label} updated`);
     } else {
-      const { error } = await supabase.from(table).insert(formData);
+      const { error } = await supabase.from(table).insert(formData as any);
       if (error) { toast.error(error.message); return; }
       toast.success(`${label} added`);
     }
